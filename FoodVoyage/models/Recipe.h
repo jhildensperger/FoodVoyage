@@ -2,6 +2,8 @@
 #import <CoreData/CoreData.h>
 
 @class Image;
+@class Ingredient;
+@class IngredientLine;
 
 @interface Recipe : NSManagedObject
 
@@ -24,19 +26,19 @@
 
 @interface Recipe (CoreDataGeneratedAccessors)
 
-- (void)addIngredientsObject:(Recipe *)value;
-- (void)removeIngredientsObject:(Recipe *)value;
+- (void)addIngredientsObject:(Ingredient *)value;
+- (void)removeIngredientsObject:(Ingredient *)value;
 - (void)addIngredients:(NSSet *)values;
 - (void)removeIngredients:(NSSet *)values;
 
-- (void)insertObject:(Recipe *)value inIngredientLinesAtIndex:(NSUInteger)idx;
+- (void)insertObject:(IngredientLine *)value inIngredientLinesAtIndex:(NSUInteger)idx;
 - (void)removeObjectFromIngredientLinesAtIndex:(NSUInteger)idx;
 - (void)insertIngredientLines:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
 - (void)removeIngredientLinesAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInIngredientLinesAtIndex:(NSUInteger)idx withObject:(Recipe *)value;
+- (void)replaceObjectInIngredientLinesAtIndex:(NSUInteger)idx withObject:(IngredientLine *)value;
 - (void)replaceIngredientLinesAtIndexes:(NSIndexSet *)indexes withIngredientLines:(NSArray *)values;
-- (void)addIngredientLinesObject:(Recipe *)value;
-- (void)removeIngredientLinesObject:(Recipe *)value;
+- (void)addIngredientLinesObject:(IngredientLine *)value;
+- (void)removeIngredientLinesObject:(IngredientLine *)value;
 - (void)addIngredientLines:(NSOrderedSet *)values;
 - (void)removeIngredientLines:(NSOrderedSet *)values;
 @end

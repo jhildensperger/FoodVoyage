@@ -22,7 +22,8 @@
 @implementation ZYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    ZYViewController *viewController = (ZYViewController *)self.window.rootViewController;
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    ZYViewController *viewController = (ZYViewController *)navController.viewControllers[0];
     viewController.managedObjectContext = self.managedObjectContext;
     return YES;
 }

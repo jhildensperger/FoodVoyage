@@ -9,11 +9,11 @@
 #import "ZYViewController.h"
 #import "YummlyClient.h"
 #import "RecipeTableViewCell.h"
+#import "RecipeDetailViewController.h"
 
 @interface ZYViewController ()
 
 @property (nonatomic) NSString *nationality;
-@property (nonatomic) UILabel *headerLabel;
 
 @end
 
@@ -52,17 +52,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[self.fetchedResultsController sections] count];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 50.0;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-    self.headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, 300, 25)];
-    [view addSubview:self.headerLabel];
-    return view;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -196,11 +185,8 @@
 
 - (void)showRecipe:(Recipe *)recipe animated:(BOOL)animated {
     // Create a detail view controller, set the recipe, then push it.
-//    RecipeDetailViewController *detailViewController = [[RecipeDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-//    detailViewController.recipe = recipe;
-//    
-//    [self.navigationController pushViewController:detailViewController animated:animated];
-//    [detailViewController release];
+    RecipeDetailViewController *detailViewController = [[RecipeDetailViewController alloc] initWithRecipe:recipe];
+    [self.navigationController pushViewController:detailViewController animated:animated];
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
@@ -226,7 +212,7 @@
             [self.managedObjectContext deleteObject:obj];
         }];
         
-        self.headerLabel.text = [NSString stringWithFormat:@"%@%@%@", [responseObject[@"matches"] count] ? @"" : @"No ", self.nationality, @" Recipes"];
+        self.title = [NSString stringWithFormat:@"%@%@%@", [responseObject[@"matches"] count] ? @"" : @"No ", self.nationality, @" Recipes"];
         
         [responseObject[@"matches"] enumerateObjectsUsingBlock:^(NSDictionary *dictionary, NSUInteger idx, BOOL *stop) {
             NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Recipe" inManagedObjectContext:self.managedObjectContext];
